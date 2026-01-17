@@ -109,6 +109,11 @@ jobs:
           sed -i '' "s/# platform :ios, '.*'/platform :ios, '14.0'/" Podfile
           sed -i '' "s/platform :ios, '.*'/platform :ios, '14.0'/" Podfile
           sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 14.0/g' Runner.xcodeproj/project.pbxproj
+          
+          # Fix GoogleUtilities version conflict between Firebase and mobile_scanner
+          sed -i '' '/target .Runner. do/i\
+          pod '\''GoogleUtilities'\'', '\''~> 8.0'\''\
+          ' Podfile
 
       - name: Install CocoaPods
         run: |
