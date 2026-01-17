@@ -50,15 +50,15 @@ jobs:
             flutter create --platforms=ios .
           fi
 
-      # Set iOS deployment target to 13.0 (required by cloud_firestore)
+      # Set iOS deployment target to 14.0 (required by google_maps_flutter)
       - name: Set iOS Deployment Target
         run: |
           cd ios
-          # Update Podfile to set minimum iOS version to 13.0
-          sed -i '' "s/# platform :ios, '.*'/platform :ios, '13.0'/" Podfile
-          sed -i '' "s/platform :ios, '.*'/platform :ios, '13.0'/" Podfile
+          # Update Podfile to set minimum iOS version to 14.0
+          sed -i '' "s/# platform :ios, '.*'/platform :ios, '14.0'/" Podfile
+          sed -i '' "s/platform :ios, '.*'/platform :ios, '14.0'/" Podfile
           # Also update the Runner project settings
-          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 13.0/g' Runner.xcodeproj/project.pbxproj
+          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 14.0/g' Runner.xcodeproj/project.pbxproj
 
       # Install CocoaPods dependencies
       - name: Install CocoaPods
