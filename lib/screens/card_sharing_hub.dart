@@ -2707,6 +2707,7 @@ class QrScannerScreen extends StatefulWidget {
 class _QrScannerScreenState extends State<QrScannerScreen> {
   MobileScannerController cameraController = MobileScannerController();
   bool _hasScanned = false;
+  bool _torchOn = false;
 
   @override
   void dispose() {
@@ -2727,26 +2728,19 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
         iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           IconButton(
-            icon: ValueListenableBuilder(
-              valueListenable: cameraController.torchState,
-              builder: (context, state, child) {
-                switch (state) {
-                  case TorchState.off:
-                    return const Icon(Icons.flash_off, color: Colors.grey);
-                  case TorchState.on:
-                    return const Icon(Icons.flash_on, color: Colors.yellow);
-                }
-              },
+            icon: Icon(
+              _torchOn ? Icons.flash_on : Icons.flash_off,
+              color: _torchOn ? Colors.yellow : Colors.grey,
             ),
-            onPressed: () => cameraController.toggleTorch(),
+            onPressed: () async {
+              await cameraController.toggleTorch();
+              setState(() {
+                _torchOn = !_torchOn;
+              });
+            },
           ),
           IconButton(
-            icon: ValueListenableBuilder(
-              valueListenable: cameraController.cameraFacingState,
-              builder: (context, state, child) {
-                return const Icon(Icons.cameraswitch);
-              },
-            ),
+            icon: const Icon(Icons.cameraswitch),
             onPressed: () => cameraController.switchCamera(),
           ),
         ],
