@@ -31,7 +31,7 @@ dependencies:
   url_launcher: ^6.0.9
   # New dependencies for enhanced features
   nfc_manager: ^3.3.0  # For NFC functionality
-  mobile_scanner: ^3.5.6  # For QR scanning (modern alternative)
+  mobile_scanner: ^5.2.3  # For QR scanning (updated for Firebase 11.x compatibility)
   flutter_colorpicker: ^1.0.3  # For color customization
   google_fonts: ^6.1.0  # For custom fonts
   lottie: ^2.7.0  # For animations

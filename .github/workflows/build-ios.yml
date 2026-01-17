@@ -1,6 +1,5 @@
 # GitHub Actions workflow to build iOS IPA for Flutter project
 # This workflow builds an IPA and uploads it as an artifact
-# NOTE: iOS builds require code signing certificates and provisioning profiles
 
 name: iOS IPA Build
 
@@ -11,10 +10,10 @@ on:
       - 'v*'
   pull_request:
     branches: [main]
-  workflow_dispatch:  # Allows manual trigger from GitHub UI
+  workflow_dispatch:
 
 env:
-  FLUTTER_VERSION: '3.27.0'  # Uses Dart SDK 3.6.x, compatible with ^3.5.3
+  FLUTTER_VERSION: '3.27.0'
 
 jobs:
   build-ios:
@@ -22,11 +21,9 @@ jobs:
     runs-on: macos-latest
     
     steps:
-      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Setup Flutter SDK
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -35,11 +32,9 @@ jobs:
           cache: true
           architecture: x64
 
-      # Verify Flutter installation
       - name: Flutter Doctor
         run: flutter doctor -v
 
-      # Get Flutter dependencies
       - name: Get dependencies
         run: flutter pub get
 
@@ -50,22 +45,64 @@ jobs:
             flutter create --platforms=ios .
           fi
 
-      # Set iOS deployment target to 14.0 (required by google_maps_flutter)
-      - name: Set iOS Deployment Target
+      # Configure iOS project for Firebase and dependencies
+      - name: Configure iOS Project
         run: |
           cd ios
-          # Update Podfile to set minimum iOS version to 14.0
-          sed -i '' "s/# platform :ios, '.*'/platform :ios, '14.0'/" Podfile
-          sed -i '' "s/platform :ios, '.*'/platform :ios, '14.0'/" Podfile
-          # Also update the Runner project settings
-          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 14.0/g' Runner.xcodeproj/project.pbxproj
           
-          # Fix GoogleUtilities version conflict between Firebase and mobile_scanner
-          # Add pod dependency override before 'target Runner'
-          sed -i '' '/target .Runner. do/i\
-          # Force GoogleUtilities version to resolve Firebase vs MLKit conflict\
-          pod '\''GoogleUtilities'\'', '\''~> 8.0'\''\
-          ' Podfile
+          # Create a properly configured Podfile
+          cat > Podfile << 'PODFILE_EOF'
+          # Uncomment this line to define a global platform for your project
+          platform :ios, '14.0'
+          
+          # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+          ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+          
+          project 'Runner', {
+            'Debug' => :debug,
+            'Profile' => :release,
+            'Release' => :release,
+          }
+          
+          def flutter_root
+            generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
+            unless File.exist?(generated_xcode_build_settings_path)
+              raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+            end
+          
+            File.foreach(generated_xcode_build_settings_path) do |line|
+              matches = line.match(/FLUTTER_ROOT\=(.*)/)
+              return matches[1].strip if matches
+            end
+            raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
+          end
+          
+          require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+          
+          flutter_ios_podfile_setup
+          
+          target 'Runner' do
+            use_frameworks!
+            use_modular_headers!
+          
+            flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+            target 'RunnerTests' do
+              inherit! :search_paths
+            end
+          end
+          
+          post_install do |installer|
+            installer.pods_project.targets.each do |target|
+              flutter_additional_ios_build_settings(target)
+              target.build_configurations.each do |config|
+                config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+              end
+            end
+          end
+          PODFILE_EOF
+          
+          # Update project.pbxproj deployment target
+          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 14.0/g' Runner.xcodeproj/project.pbxproj
 
       # Install CocoaPods dependencies
       - name: Install CocoaPods
@@ -73,7 +110,7 @@ jobs:
           cd ios
           pod install --repo-update
 
-      # Build iOS app (unsigned - always runs for simplicity)
+      # Build iOS app (unsigned)
       - name: Build iOS (No Code Signing)
         run: flutter build ios --release --no-codesign
 
