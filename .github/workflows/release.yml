@@ -103,11 +103,17 @@ jobs:
             flutter create --platforms=ios .
           fi
 
+      - name: Set iOS Deployment Target
+        run: |
+          cd ios
+          sed -i '' "s/# platform :ios, '.*'/platform :ios, '13.0'/" Podfile
+          sed -i '' "s/platform :ios, '.*'/platform :ios, '13.0'/" Podfile
+          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9.]*/IPHONEOS_DEPLOYMENT_TARGET = 13.0/g' Runner.xcodeproj/project.pbxproj
+
       - name: Install CocoaPods
         run: |
           cd ios
           pod install --repo-update
-        continue-on-error: true
 
       - name: Build iOS (Unsigned)
         run: flutter build ios --release --no-codesign
