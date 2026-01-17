@@ -1,7 +1,7 @@
 # GitHub Actions workflow to build Android APK for Flutter project
 # This workflow builds a release APK and uploads it as an artifact
 
-name: Build Android APK
+name: Android APK Build
 
 on:
   push:
@@ -50,13 +50,6 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      # Create google-services.json from secrets (for Firebase)
-      - name: Create google-services.json
-        run: |
-          echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 -d > android/app/google-services.json
-        if: ${{ secrets.GOOGLE_SERVICES_JSON != '' }}
-        continue-on-error: true
-
       # Build APK (release mode)
       - name: Build APK (Release)
         run: flutter build apk --release
@@ -98,40 +91,3 @@ jobs:
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # Optional: Build debug APK for testing
-  build-android-debug:
-    name: Build Android Debug APK
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Java JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: 'gradle'
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
-          channel: 'stable'
-          cache: true
-
-      - name: Get dependencies
-        run: flutter pub get
-
-      - name: Build Debug APK
-        run: flutter build apk --debug
-
-      - name: Upload Debug APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-apk-debug
-          path: build/app/outputs/flutter-apk/app-debug.apk
-          retention-days: 7
