@@ -41,3 +41,20 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Android signing keys (NEVER commit these!)
+android/key.properties
+android/app/*.jks
+android/app/*.keystore
+*.jks
+*.keystore
+
+# iOS signing (NEVER commit these!)
+ios/*.mobileprovision
+ios/*.p12
+ios/ExportOptions.plist
+
+# Firebase config files (optional - can be committed if not sensitive)
+# Uncomment these if you want to keep Firebase configs in secrets only
+# android/app/google-services.json
+# ios/Runner/GoogleService-Info.plist
