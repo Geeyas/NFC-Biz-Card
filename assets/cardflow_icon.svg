@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- CardFlow brand gradient - purple theme -->
+    <linearGradient id="main_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="card_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="highlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+    <filter id="drop_shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="20" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main rounded square background with gradient -->
+  <rect x="36" y="36" width="440" height="440" rx="110" fill="url(#main_gradient)" filter="url(#drop_shadow)"/>
+  
+  <!-- Business card stack effect - 3D layered cards -->
+  <!-- Back card (shadow) -->
+  <rect x="120" y="165" width="190" height="120" rx="16" fill="rgba(0,0,0,0.1)" transform="rotate(-6 215 225)"/>
+  
+  <!-- Middle card (semi-transparent) -->
+  <rect x="130" y="175" width="190" height="120" rx="16" fill="rgba(255,255,255,0.2)" transform="rotate(3 225 235)" filter="url(#drop_shadow)"/>
+  
+  <!-- Front card (white with gradient border) -->
+  <rect x="145" y="190" width="190" height="120" rx="16" fill="rgba(255,255,255,0.98)" stroke="url(#card_gradient)" stroke-width="3" filter="url(#drop_shadow)"/>
+  
+  <!-- Card content - modern design -->
+  <!-- Name/Title bar -->
+  <rect x="168" y="215" width="80" height="10" rx="5" fill="url(#card_gradient)"/>
+  <!-- Subtitle -->
+  <rect x="168" y="233" width="50" height="7" rx="3.5" fill="#888"/>
+  <!-- Contact details -->
+  <line x1="168" y1="252" x2="218" y2="252" stroke="#bbb" stroke-width="5" stroke-linecap="round"/>
+  <line x1="168" y1="264" x2="240" y2="264" stroke="#bbb" stroke-width="5" stroke-linecap="round"/>
+  <line x1="168" y1="276" x2="205" y2="276" stroke="#bbb" stroke-width="5" stroke-linecap="round"/>
+  
+  <!-- Mini card icon on front card -->
+  <rect x="285" y="220" width="35" height="25" rx="4" fill="url(#card_gradient)" opacity="0.3"/>
+  
+  <!-- Flow/Share arrows with glow effect -->
+  <g filter="url(#glow)">
+    <path d="M 345 225 Q 380 210 395 240 Q 380 270 345 255" stroke="rgba(255,255,255,0.95)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="385,228 400,240 385,252" fill="rgba(255,255,255,0.95)"/>
+  </g>
+  
+  <!-- NFC signal waves - modern ripple effect -->
+  <g opacity="0.9">
+    <circle cx="370" cy="330" r="20" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="5"/>
+    <circle cx="370" cy="330" r="32" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="4"/>
+    <circle cx="370" cy="330" r="44" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="3"/>
+    <circle cx="370" cy="330" r="56" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+    <!-- NFC center dot -->
+    <circle cx="370" cy="330" r="8" fill="rgba(255,255,255,0.95)"/>
+  </g>
+  
+  <!-- Subtle glassmorphism highlight overlay -->
+  <rect x="36" y="36" width="440" height="440" rx="110" fill="url(#highlight)"/>
+  
+  <!-- Small connecting dots -->
+  <circle cx="280" cy="180" r="4" fill="rgba(255,255,255,0.6)"/>
+  <circle cx="300" cy="170" r="3" fill="rgba(255,255,255,0.4)"/>
+  <circle cx="320" cy="165" r="2" fill="rgba(255,255,255,0.3)"/>
+</svg>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- CardFlow brand gradient - purple theme -->
+    <linearGradient id="cardflow_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f093fb;stop-opacity:1" />
+    </linearGradient>
+    <!-- Card accent gradient -->
+    <linearGradient id="card_accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <!-- Highlight gradient -->
+    <linearGradient id="highlight_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+    <!-- Shadow filter -->
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-opacity="0.35"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background rounded square -->
+  <rect x="5" y="5" width="110" height="110" rx="28" fill="url(#cardflow_gradient)" filter="url(#shadow)"/>
+  
+  <!-- Business card stack - larger and more prominent -->
+  <!-- Back card (shadow) -->
+  <rect x="20" y="35" width="48" height="30" rx="5" fill="rgba(0,0,0,0.15)" transform="rotate(-6 44 50)"/>
+  
+  <!-- Middle card -->
+  <rect x="24" y="38" width="48" height="30" rx="5" fill="rgba(255,255,255,0.25)" transform="rotate(3 48 53)" filter="url(#shadow)"/>
+  
+  <!-- Front card - white with gradient border -->
+  <rect x="30" y="42" width="48" height="30" rx="5" fill="rgba(255,255,255,0.98)" stroke="url(#card_accent)" stroke-width="1" filter="url(#shadow)"/>
+  
+  <!-- Card details on front card - modern minimal style -->
+  <rect x="34" y="46" width="20" height="3" rx="1.5" fill="url(#card_accent)"/>
+  <rect x="34" y="51" width="13" height="2" rx="1" fill="#888"/>
+  <line x1="34" y1="56" x2="48" y2="56" stroke="#bbb" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="34" y1="59" x2="55" y2="59" stroke="#bbb" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="34" y1="62" x2="45" y2="62" stroke="#bbb" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- Mini card icon -->
+  <rect x="65" y="50" width="10" height="7" rx="1.5" fill="url(#card_accent)" opacity="0.4"/>
+  
+  <!-- Flow/Share arrows with glow -->
+  <g filter="url(#glow)">
+    <path d="M 80 50 Q 92 45 98 55 Q 92 65 80 60" stroke="rgba(255,255,255,0.95)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="94,52 99,55 94,58" fill="rgba(255,255,255,0.95)"/>
+  </g>
+  
+  <!-- NFC signal waves - modern ripple -->
+  <g opacity="0.95">
+    <circle cx="88" cy="78" r="6" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2"/>
+    <circle cx="88" cy="78" r="10" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.5"/>
+    <circle cx="88" cy="78" r="14" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+    <circle cx="88" cy="78" r="18" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+    <!-- Center dot -->
+    <circle cx="88" cy="78" r="2.5" fill="rgba(255,255,255,0.95)"/>
+  </g>
+  
+  <!-- Glassmorphism highlight overlay -->
+  <rect x="5" y="5" width="110" height="110" rx="28" fill="url(#highlight_gradient)"/>
+</svg>

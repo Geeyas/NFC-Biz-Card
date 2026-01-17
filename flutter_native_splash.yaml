@@ -1,0 +1,24 @@
+flutter_native_splash:
+  # Background color with CardFlow theme gradient color
+  color: "#667eea"
+  # CardFlow logo for splash screen
+  image: assets/cardflow_icon.png
+  # Or use a background image instead
+  # background_image: "assets/background.png"
+  
+  # For dark mode
+  color_dark: "#1a1a2e"
+  image_dark: assets/cardflow_icon.png
+  
+  # Android 12 splash screen
+  android_12:
+    image: assets/cardflow_icon.png
+    icon_background_color: "#667eea"
+    image_dark: assets/cardflow_icon.png
+    icon_background_color_dark: "#1a1a2e"
+
+  # Web splash
+  web: true
+  
+  # Full screen mode for splash (available in Android, iOS)
+  fullscreen: true

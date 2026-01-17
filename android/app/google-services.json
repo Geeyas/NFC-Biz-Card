@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "336528502793",
+    "firebase_url": "https://ygitapp-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ygitapp",
+    "storage_bucket": "ygitapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336528502793:android:99ae564d0570be3a5408d8",
+        "android_client_info": {
+          "package_name": "com.example.ygit_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336528502793-suv6n1irdj58nq3vm2no78mj91adejlc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ygit_app",
+            "certificate_hash": "8a7e2570eb39d5faec75b3555379bca87c71624a"
+          }
+        },
+        {
+          "client_id": "336528502793-fis2h3fhtbh6beehs5n2mrnfofjo51dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPykHGsN6uvg8Q8owxI7qsAy56kvolB40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336528502793-fis2h3fhtbh6beehs5n2mrnfofjo51dl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

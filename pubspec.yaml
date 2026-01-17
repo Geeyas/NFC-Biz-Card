@@ -1,0 +1,74 @@
+name: cardflow
+description: "CardFlow - Professional Business Card Sharing & NFC Exchange App"
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_maps_flutter: ^2.3.0  # For Google Maps integration
+  mailer: ^6.2.0
+  firebase_auth: ^5.3.1
+  cloud_firestore: ^5.4.4
+  firebase_core: ^3.6.0
+  provider: ^6.1.2
+  flutter_local_notifications: ^17.2.3
+  video_player: ^2.9.2
+  flutter_chat_ui: ^1.6.15
+  google_sign_in: ^5.4.2
+  font_awesome_flutter: ^10.4.0
+  cupertino_icons: ^1.0.8
+  image_picker: ^0.8.7+3
+  firebase_storage: ^12.0.0
+  firebase_database: ^11.0.0
+  firebase_app_check: ^0.3.1+4
+  shared_preferences: ^2.1.0
+  qr_flutter: ^4.0.0
+  url_launcher: ^6.0.9
+  # New dependencies for enhanced features
+  nfc_manager: ^3.3.0  # For NFC functionality
+  mobile_scanner: ^3.5.6  # For QR scanning (modern alternative)
+  flutter_colorpicker: ^1.0.3  # For color customization
+  google_fonts: ^6.1.0  # For custom fonts
+  lottie: ^2.7.0  # For animations
+  shimmer: ^3.0.0  # For shimmer effects
+  flutter_staggered_animations: ^1.1.1  # For staggered animations
+  glassmorphism: ^3.0.0  # For glass morphism effects
+  flutter_svg: ^2.0.10+1  # For SVG support
+  flutter_svg_provider: ^1.0.7
+  nearby_connections: ^4.3.0  # For Nearby Share (cross-platform)
+  permission_handler: ^11.3.1  # For permissions management
+  screenshot: ^3.0.0  # For capturing widget as image
+  path_provider: ^2.1.0  # For getting app directories
+  share_plus: ^10.0.2  # For sharing files
+  image: ^4.0.17  # For image processing
+  zxing2: ^0.2.3  # For decoding QR codes from images
+  # Social Networking Features
+  firebase_messaging: ^15.1.3  # Push notifications (compatible version)
+  cloud_functions: ^5.1.3  # Cloud Functions for push notifications
+  timeago: ^3.7.0  # Time formatting
+  badges: ^3.1.2  # Notification badges
+  emoji_picker_flutter: ^3.0.0  # Emoji support
+  image_cropper: ^8.0.2  # Image cropping
+  http: ^1.2.0  # For FCM HTTP API calls
+  device_info_plus: ^10.1.2  # Device information for FCM token management
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.4
+
+flutter:
+  uses-material-design: true
+
+  # Adding assets for your application (CardFlow logos)
+  assets:
+    - assets/
+    - assets/cardflow_logo.svg
+    - assets/cardflow_icon.svg
